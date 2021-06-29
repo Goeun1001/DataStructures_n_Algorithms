@@ -1,6 +1,6 @@
 # DataStructures & Algorithms
 
-![Data Structures &amp; Algorithms in Swift | raywenderlich.com](https://assets.alexandria.raywenderlich.com/books/alg/images/790b2651c03dbb1eca6994a4cf9f1416b6139a02ac99ef1c911ca91b5152ac58/w594.png)
+![Data Structures &amp; Algorithms in Swift | raywenderlich.com](https://user-images.githubusercontent.com/47523862/123743289-f4245980-d8e7-11eb-9a6f-45369a34ef72.png)
 
 📌 This repositories are more code oriented than descriptions.
 
