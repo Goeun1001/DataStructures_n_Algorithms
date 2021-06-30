@@ -1,8 +1,3 @@
-# Queue
-
-Protocol
-
-```swift
 public protocol Queue {
     associatedtype Element
     mutating func enqueue(element: Element) -> Bool
@@ -10,11 +5,7 @@ public protocol Queue {
     var isEmpty: Bool { get }
     var peek: Element? { get }
 }
-```
 
-ArrayQueue
-
-```swift
 public struct ArrayQueue<T>: Queue {
     private var array: [T] = []
     public init() {}
@@ -36,11 +27,7 @@ public struct ArrayQueue<T>: Queue {
         isEmpty ? nil : array.removeFirst()
     }
 }
-```
 
-Circular Queue
-
-```swift
 public struct RingBuffer<T> {
     private var array: [T?]
     private var readIndex = 0
@@ -92,19 +79,6 @@ public struct RingBuffer<T> {
     }
 }
 
-extension RingBuffer: Sequence {
-    public func makeIterator() -> AnyIterator<T> {
-        var index = readIndex
-        return AnyIterator {
-            guard index < self.writeIndex else { return nil }
-            defer {
-                index += 1
-            }
-            return self.array[wrapped: index]
-        }
-    }
-}
-
 private extension Array {
     subscript (wrapped index: Int) -> Element {
         get {
@@ -115,9 +89,7 @@ private extension Array {
         }
     }
 }
-```
 
-```swift
 public struct QueueRingBuffer<T>: Queue {
     private var ringBuffer: RingBuffer<T>
     
@@ -141,15 +113,7 @@ public struct QueueRingBuffer<T>: Queue {
         ringBuffer.read()
     }
 }
-```
 
-
-
-## Challenge 4
-
-**Reverse Queue**
-
-```swift
 extension ArrayQueue {
     public mutating func reversed() -> ArrayQueue {
         self.array = array.reversed()
@@ -168,15 +132,7 @@ extension ArrayQueue {
         return queue
     }
 }
-```
 
-
-
-## Challenge 5
-
-**Deque**
-
-```swift
 public enum Direction {
     case front
     case back
@@ -220,5 +176,3 @@ public struct DequeImpl<T>: Deque {
         }
     }
 }
-```
-
