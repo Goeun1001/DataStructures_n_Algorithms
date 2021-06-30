@@ -127,7 +127,7 @@ extension LinkedList: CustomStringConvertible {
 extension LinkedList : Collection {
     public struct Index: Comparable {
         public var node: Node<Value>?
-
+        
         static public func ==(lhs: Index, rhs: Index) -> Bool {
             switch (lhs.node, rhs.node) {
             case let (left?, right?):
@@ -138,7 +138,7 @@ extension LinkedList : Collection {
                 return false
             }
         }
-
+        
         static public func <(lhs: Index, rhs: Index) -> Bool {
             guard lhs != rhs else {
                 return false
@@ -147,19 +147,19 @@ extension LinkedList : Collection {
             return nodes.contains { $0 === rhs.node }
         }
     }
-
+    
     public var startIndex: Index {
         Index(node: head)
     }
-
+    
     public var endIndex: Index {
         Index(node: tail?.next)
     }
-
+    
     public func index(after i: Index) -> Index {
         Index(node: i.node?.next)
     }
-
+    
     public subscript(position: Index) -> Value {
         position.node!.value
     }
@@ -167,32 +167,32 @@ extension LinkedList : Collection {
 
 extension LinkedList {
     private mutating func copyNodes() {
-      guard !isKnownUniquelyReferenced(&head) else { return }
-      guard var oldNode = head else {
-        return
-      }
-      
-      head = Node(value: oldNode.value)
-      var newNode = head
-      
-      while let nextOldNode = oldNode.next {
-        newNode!.next = Node(value: nextOldNode.value)
-        newNode = newNode!.next
+        guard !isKnownUniquelyReferenced(&head) else { return }
+        guard var oldNode = head else {
+            return
+        }
         
-        oldNode = nextOldNode
-      }
-
-      tail = newNode
+        head = Node(value: oldNode.value)
+        var newNode = head
+        
+        while let nextOldNode = oldNode.next {
+            newNode!.next = Node(value: nextOldNode.value)
+            newNode = newNode!.next
+            
+            oldNode = nextOldNode
+        }
+        
+        tail = newNode
     }
-
+    
     private mutating func copyNodes(returningCopyOf node: Node<Value>?) -> Node<Value>? {
         guard !isKnownUniquelyReferenced(&head) else { return nil }
         guard var oldNode = head else { return nil }
-
+        
         head = Node(value: oldNode.value)
         var newNode = head
         var nodeCopy: Node<Value>?
-
+        
         while let nextOldNode = oldNode.next {
             if oldNode === node {
                 nodeCopy = newNode
@@ -214,7 +214,7 @@ extension LinkedList {
         printInReverse(node: node.next)
         print(node.value)
     }
-
+    
     public func printInReverse<T>(list: LinkedList<T>) {
         printInReverse(node: list.head)
     }
@@ -223,16 +223,16 @@ extension LinkedList {
 extension LinkedList {
     // Challenge 2
     // Find the middle node
-
+    
     public func getMiddle<T>(list: LinkedList<T>) -> Node<T>? {
         var slow = list.head
         var fast = list.head
-
+        
         while let nextFast = fast?.next {
             fast = nextFast.next
             slow = slow?.next
         }
-
+        
         return slow
     }
 }
@@ -245,7 +245,7 @@ extension LinkedList {
         for value in self {
             tmpList.push(value: value)
         }
-
+        
         head = tmpList.head
     }
     
@@ -266,3 +266,86 @@ extension LinkedList {
     }
 }
 
+func mergeSorted<T: Comparable>(_ left: LinkedList<T>,
+                                _ right: LinkedList<T>) -> LinkedList<T> {
+    // Challenge 4
+    // Mergo two lists
+    guard !left.isEmpty else {
+        return right
+    }
+    
+    guard !right.isEmpty else {
+        return left
+    }
+    
+    var newHead: Node<T>?
+    var tail: Node<T>?
+    
+    var currentLeft = left.head
+    var currentRight = right.head
+    
+    if let leftNode = currentLeft, let rightNode = currentRight {
+        if leftNode.value < rightNode.value {
+            newHead = leftNode
+            currentLeft = leftNode.next
+        } else {
+            newHead = rightNode
+            currentRight = rightNode.next
+        }
+        tail = newHead
+    }
+    
+    while let leftNode = currentLeft, let rightNode = currentRight {
+        if leftNode.value < rightNode.value {
+            tail?.next = leftNode
+            currentLeft = leftNode.next
+        } else {
+            tail?.next = rightNode
+            currentRight = rightNode.next
+        }
+        tail = tail?.next
+    }
+    
+    if let leftNodes = currentLeft {
+        tail?.next = leftNodes
+    }
+    
+    if let rightNodes = currentRight {
+        tail?.next = rightNodes
+    }
+    
+    var list = LinkedList<T>()
+    list.head = newHead
+    list.tail = {
+        while let next = tail?.next {
+            tail = next
+        }
+        return tail
+    }()
+    return list
+}
+
+extension LinkedList where Value: Equatable {
+    // Challenge 5
+    // Remove all occurrencees
+    mutating func removeAll(_ value: Value) {
+        while let head = self.head, head.value == value {
+            self.head = head.next
+        }
+        var prev = head
+        var current = head?.next
+        while let currentNode = current {
+            if currentNode.next == nil {
+                tail
+            }
+            guard currentNode.value != value else {
+                prev?.next = currentNode.next
+                current = prev?.next
+                continue
+            }
+            prev = current
+            current = current?.next
+        }
+        tail = prev
+    }
+}

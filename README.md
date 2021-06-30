@@ -4,7 +4,9 @@
 
 📌 This repositories are more code oriented than descriptions.
 
-Additional Resources: [raywenderlich](https://github.com/raywenderlich) / [swift-algorithm-club](https://github.com/raywenderlich/swift-algorithm-club)
+Book Original Source: [raywenderlich](https://github.com/raywenderlich)/[alg-materials](https://github.com/raywenderlich/alg-materials)
+
+Additional Source: [raywenderlich](https://github.com/raywenderlich) / [swift-algorithm-club](https://github.com/raywenderlich/swift-algorithm-club)
 
 ## Summary
 

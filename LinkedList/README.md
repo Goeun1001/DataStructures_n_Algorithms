@@ -271,3 +271,97 @@ extension LinkedList {
 }
 ```
 
+
+
+## Challenge 4
+
+**Mergo two lists**
+
+```swift
+func mergeSorted<T: Comparable>(_ left: LinkedList<T>,
+                                _ right: LinkedList<T>) -> LinkedList<T> {
+    guard !left.isEmpty else {
+        return right
+    }
+    
+    guard !right.isEmpty else {
+        return left
+    }
+    
+    var newHead: Node<T>?
+    var tail: Node<T>?
+    
+    var currentLeft = left.head
+    var currentRight = right.head
+    
+    if let leftNode = currentLeft, let rightNode = currentRight {
+        if leftNode.value < rightNode.value {
+            newHead = leftNode
+            currentLeft = leftNode.next
+        } else {
+            newHead = rightNode
+            currentRight = rightNode.next
+        }
+        tail = newHead
+    }
+    
+    while let leftNode = currentLeft, let rightNode = currentRight {
+        if leftNode.value < rightNode.value {
+            tail?.next = leftNode
+            currentLeft = leftNode.next
+        } else {
+            tail?.next = rightNode
+            currentRight = rightNode.next
+        }
+        tail = tail?.next
+    }
+    
+    if let leftNodes = currentLeft {
+        tail?.next = leftNodes
+    }
+    
+    if let rightNodes = currentRight {
+        tail?.next = rightNodes
+    }
+    
+    var list = LinkedList<T>()
+    list.head = newHead
+    list.tail = {
+        while let next = tail?.next {
+            tail = next
+        }
+        return tail
+    }()
+    return list
+}
+```
+
+## Challenge 5
+
+**Remove all occurrencees**
+
+```swift
+extension LinkedList where Value: Equatable {
+    mutating func removeAll(_ value: Value) {
+        while let head = self.head, head.value == value {
+            self.head = head.next
+        }
+        var prev = head
+        var current = head?.next
+        while let currentNode = current {
+            if currentNode.next == nil {
+                tail
+            }
+            guard currentNode.value != value else {
+                prev?.next = currentNode.next
+                current = prev?.next
+                continue
+            }
+            prev = current
+            current = current?.next
+        }
+        tail = prev
+    }
+}
+```
+
