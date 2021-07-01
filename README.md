@@ -20,15 +20,17 @@ Additional Source: [raywenderlich](https://github.com/raywenderlich) / [swift-al
    - Tries
 5. [Heap](https://github.com/Goeun1001/DataStructures_n_Algorithms/tree/master/Heap)
 6. [Priority Queue](https://github.com/Goeun1001/DataStructures_n_Algorithms/tree/master/PriorityQueue)
-7. Sort
+7. [Sort](https://github.com/Goeun1001/DataStructures_n_Algorithms/tree/master/Sort)
    - Bubble Sort
    - Selection Sort
    - Insection Sort
    - Merge Sort
    - Radix Sort
-8. Graph
+8. [Graph](https://github.com/Goeun1001/DataStructures_n_Algorithms/tree/master/Graph)
    - BFS
    - DFS
+   - Dijkstra's Algorithm
+   - Prim's Algorithm
 
 
 
