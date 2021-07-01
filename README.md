@@ -17,8 +17,18 @@ Additional Source: [raywenderlich](https://github.com/raywenderlich) / [swift-al
    - Binary Tree
    - Binary Search Tree
    - AVL Tree
-5. Priority Queue
-6. Sort
+   - Tries
+5. [Heap](https://github.com/Goeun1001/DataStructures_n_Algorithms/tree/master/Heap)
+6. [Priority Queue](https://github.com/Goeun1001/DataStructures_n_Algorithms/tree/master/PriorityQueue)
+7. Sort
+   - Bubble Sort
+   - Selection Sort
+   - Insection Sort
+   - Merge Sort
+   - Radix Sort
+8. Graph
+   - BFS
+   - DFS
 
 
 
@@ -33,6 +43,6 @@ Additional Source: [raywenderlich](https://github.com/raywenderlich) / [swift-al
 
 🥲 단점
 
-- 450p의 분량에 모든 것을 넣다보니 초보자에게는 어렵다. 
+- 450p의 분량에 모든 걸 넣다보니 자료구조 입문자에게 어렵다. 
 - 영어 원서다보니 더 어려울 수 있다.
 - 50$ + 해외배송이라서 비싸다.
