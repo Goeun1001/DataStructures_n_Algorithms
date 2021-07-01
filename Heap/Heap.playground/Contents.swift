@@ -1,6 +1,3 @@
-# Heap
-
-```swift
 public struct Heap<Element: Equatable> {
     var elements: [Element] = []
     let sort: (Element, Element) -> Bool
@@ -124,13 +121,15 @@ public struct Heap<Element: Equatable> {
         return nil
     }
 }
-```
 
-## Challenge 1
+var heap = Heap(sort: >, elements: [1,12,3,4,1,6,8,7])
 
-**Find the nth smalleset integer**
+while !heap.isEmpty {
+    print(heap.remove()!)
+}
 
-```swift
+// Challenge 1
+// Find the nth smalleset integer
 func getNthSmallestElement(n: Int, elements: [Int]) -> Int? {
     var heap = Heap(sort: <, elements: elements)
     var current = 1
@@ -144,26 +143,18 @@ func getNthSmallestElement(n: Int, elements: [Int]) -> Int? {
     
     return nil
 }
-```
 
-## Challenge 3
-
-**Comginning two heaps**
-
-```swift
+// Challenge 3
+// Comginning two heaps
 extension Heap {
     mutating public func merge(heap: Heap) {
         elements = elements + heap.elements
         buildHeap()
     }
 }
-```
 
-## Challenge 4
-
-**A Min Heap?**
-
-```swift
+// Challenge 4
+// A Min Heap?
 extension Heap {
     func isMinHeap<Element: Comparable> (elements: [Element]) -> Bool {
         guard !elements.isEmpty else {
@@ -184,5 +175,3 @@ extension Heap {
         return true
     }
 }
-```
-
