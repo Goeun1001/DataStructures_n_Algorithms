@@ -1,7 +1,5 @@
 # Queue
 
-Protocol
-
 ```swift
 public protocol Queue {
     associatedtype Element
@@ -12,7 +10,7 @@ public protocol Queue {
 }
 ```
 
-ArrayQueue
+### ArrayQueue
 
 ```swift
 public struct ArrayQueue<T>: Queue {
@@ -38,7 +36,7 @@ public struct ArrayQueue<T>: Queue {
 }
 ```
 
-Circular Queue
+### Circular Queue
 
 ```swift
 public struct RingBuffer<T> {
@@ -143,7 +141,36 @@ public struct QueueRingBuffer<T>: Queue {
 }
 ```
 
+### Stack Queue
 
+```swift
+public struct QueueStack<T> : Queue {
+    private var leftStack: [T] = []
+    private var rightStack: [T] = []
+    public init() {}
+    
+    public var isEmpty: Bool {
+        leftStack.isEmpty && rightStack.isEmpty
+    }
+    
+    public var peek: T? {
+        !leftStack.isEmpty ? leftStack.last : rightStack.first
+    }
+    
+    public mutating func enqueue(element: T) -> Bool {
+        rightStack.append(element)
+        return true
+    }
+    
+    public mutating func dequeue() -> T? {
+        if leftStack.isEmpty {
+            leftStack = rightStack.reversed()
+            rightStack.removeAll()
+        }
+        return leftStack.popLast()
+    }
+}
+```
 
 ## Challenge 4
 
